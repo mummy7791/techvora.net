@@ -5,21 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - TechVora</title>
     <link rel="stylesheet" href="contact.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
     <header>
         <h1>Contact TechVora</h1>
     </header>
+    
     <nav>
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
         <a href="careers.html">Careers</a>
     </nav>
+    
     <div class="container">
         <h2>Get in Touch</h2>
         <p>Have questions? We're here to help.</p>
-        <form action="#" method="post">
+
+        <form action="https://formspree.io/f/xdkewdbr" method="POST" id="contactForm">
             <label for="name">Your Name</label>
             <input type="text" id="name" name="name" required>
             
@@ -31,9 +35,37 @@
 
             <button type="submit">Send Message</button>
         </form>
+
+        <p id="statusMessage"></p>
     </div>
+
     <footer>
         <p>&copy; 2024 TechVora. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let formData = new FormData(this);
+            
+            let response = await fetch(this.action, {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            });
+
+            let statusMessage = document.getElementById("statusMessage");
+            if (response.ok) {
+                statusMessage.textContent = "Message sent successfully!";
+                statusMessage.style.color = "green";
+                this.reset();
+            } else {
+                statusMessage.textContent = "Error sending message. Please try again.";
+                statusMessage.style.color = "red";
+            }
+        });
+    </script>
 </body>
 </html>
+
