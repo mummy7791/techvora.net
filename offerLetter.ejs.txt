@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer Letter - Tech Vora</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        function generateOfferLetter() {
+            const { jsPDF } = window.jspdf;
+            const urlParams = new URLSearchParams(window.location.search);
+            const employeeId = urlParams.get("employeeId");
+
+            if (!employeeId) {
+                alert("Invalid request.");
+                return;
+            }
+
+            const doc = new jsPDF();
+            const offerText = `Tech Vora\n123 Tech Street, Innovation City\n\nDate: ${new Date().toLocaleDateString()}\n\nDear Employee,\n\nCongratulations! We are pleased to offer you a position at Tech Vora.\nYour Employee ID is: ${employeeId}\n\nPlease review and accept the offer by signing below.\n\nSincerely,\nHR Team, Tech Vora`;
+
+            doc.text(offerText, 10, 10);
+            doc.save(`Offer_Letter_${employeeId}.pdf`);
+        }
+    </script>
+</head>
+<body onload="generateOfferLetter()">
+    <h1>Your Offer Letter is being generated...</h1>
+</body>
+</html>

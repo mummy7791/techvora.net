@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer Letter Request - TechVora</title>
+    <link rel="stylesheet" href="career.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <img src="Techvora.png" alt="Tech Vora Logo" class="logo">
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="careers.html" class="active">Careers</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="offer-letter">
+        <h2>Retrieve Your Offer Letter</h2>
+        <p>Click the button below to download your offer letter if your email is verified.</p>
+        <button id="downloadButton" class="btn">Download Offer Letter</button>
+        <p id="message"></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 TechVora. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        await transporter.sendMail({
+    from: 'your-email@gmail.com', // Replace with your email
+    to: email,
+    subject: 'Tech Vora Offer Letter Request',
+    text: `Dear ${employeeName},\n\nYour offer letter is attached.\n\nKind regards,\nTech Vora HR Team`,
+    attachments: [
+        {
+            filename: `${employeeId}.pdf`,
+            path: filePath
+        }
+    ]
+}, (error, info) => {
+    if (error) {
+        console.log("Error sending email:", error);  // Log error if email sending fails
+        return res.status(500).send("Error sending email");
+    }
+    console.log("Email sent successfully:", info);  // Log email sent status
+});
+
+    </script>
+</body>
+</html>
