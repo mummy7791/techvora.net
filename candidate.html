@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Portal - Tech Vora</title>
-    <link rel="stylesheet" href="career.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Candidate Portal - Tech Vora</title>
+  <link rel="stylesheet" href="candidate.css" />
 </head>
 <body>
-    <header>
-        <h1>Candidate Login</h1>
-    </header>
+  <header class="candidate-header">
+    <h1>Candidate Portal</h1>
+    <p>Login and capture your photo</p>
+  </header>
 
-    <section class="candidate-login">
-        <input type="text" id="candidateId" placeholder="Enter Employee ID (e.g., TV001)">
-        <button onclick="candidateLogin()">Login</button>
-    </section>
+  <section class="candidate-login-box">
+    <input type="text" id="candidateId" placeholder="Enter your Candidate ID" />
+    <button onclick="loginAndCapture()">Login & Capture Photo</button>
+  </section>
 
-    <section id="candidateDetails" style="display:none;">
-        <h3>Candidate Details</h3>
-        <p><strong>ID:</strong> <span id="candId"></span></p>
-        <p><strong>Name:</strong> <span id="candName"></span></p>
-        <p><strong>Email:</strong> <span id="candEmail"></span></p>
-        <p><strong>Job Title:</strong> <span id="candJob"></span></p>
-        <p><strong>Salary:</strong> <span id="candSalary"></span></p>
-        <button onclick="downloadOfferLetter()">Download Offer Letter</button>
-    </section>
+  <!-- Camera Section -->
+  <section id="cameraSection" style="display:none; text-align:center;">
+    <video id="video" width="320" height="240" autoplay></video>
+    <br />
+    <button onclick="capturePhoto()">Capture</button>
+    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+  </section>
 
-    <footer>
-        <p>&copy; 2024 Tech Vora. All Rights Reserved.</p>
-    </footer>
+  <!-- Candidate Info Section -->
+  <section id="candidateDetails" class="candidate-details" style="display:none;">
+    <div class="candidate-card animated-card" id="detailsContent"></div>
+    <div style="text-align:center; margin-top:20px;">
+      <img id="capturedPhoto" alt="Captured Photo" width="200" />
+    </div>
+  </section>
 
-    <script src="career.js"></script>
+  <footer class="career-footer">
+    <p>&copy; 2024 Tech Vora. All Rights Reserved.</p>
+  </footer>
+
+  <script src="candidate.js"></script>
 </body>
 </html>
+
