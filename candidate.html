@@ -26,12 +26,19 @@
   </section>
 
   <!-- Candidate Info Section -->
-  <section id="candidateDetails" class="candidate-details" style="display:none;">
-    <div class="candidate-card animated-card" id="detailsContent"></div>
-    <div style="text-align:center; margin-top:20px;">
-      <img id="capturedPhoto" alt="Captured Photo" width="200" />
-    </div>
-  </section>
+  <!-- Camera Section -->
+<section id="cameraSection" style="display:none; text-align:center;">
+  <video id="video" width="300" height="225" autoplay></video><br>
+  <button onclick="capturePhoto()">Capture Photo</button>
+  <canvas id="canvas" style="display:none;"></canvas>
+</section>
+
+<!-- Captured Image Preview -->
+<section id="imagePreview" style="text-align:center; display:none;">
+  <h3>Captured Photo:</h3>
+  <img id="capturedPhoto" width="200" />
+</section>
+
 
   <footer class="career-footer">
     <p>&copy; 2024 Tech Vora. All Rights Reserved.</p>
