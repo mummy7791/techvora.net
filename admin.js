@@ -12,3 +12,6 @@ function adminLogin() {
         alert('Invalid Admin credentials');
     }
 }
+window.onload = function () {
+  // your adminLogin function here
+};
