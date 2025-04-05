@@ -1,3 +1,6 @@
+// candidate.js
+
+// Triggered when candidate clicks login
 function loginAndCapture() {
   const id = document.getElementById("candidateId").value.trim();
   const data = localStorage.getItem(id);
@@ -21,22 +24,23 @@ function loginAndCapture() {
     });
 }
 
+// Triggered when user clicks capture
 function capturePhoto() {
   const canvas = document.getElementById("canvas");
   const video = document.getElementById("video");
   const context = canvas.getContext("2d");
 
-  // Draw current frame to canvas
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   const imageUrl = canvas.toDataURL("image/png");
 
   // Stop webcam
   video.srcObject.getTracks().forEach(track => track.stop());
 
-  // Display candidate details and photo
+  // Show details and photo
   showCandidateDetails(imageUrl);
 }
 
+// Display all candidate details + image + candidate ID below image
 function showCandidateDetails(imageUrl) {
   const id = document.getElementById("candidateId").value.trim();
   const data = JSON.parse(localStorage.getItem(id));
@@ -45,6 +49,8 @@ function showCandidateDetails(imageUrl) {
 
   document.getElementById("candidateDetails").style.display = "block";
   document.getElementById("detailsContent").innerHTML = `
+    <img id="capturedPhoto" src="${imageUrl}" alt="Candidate Photo" />
+    <p><strong>Candidate ID:</strong> ${data.candidateId || id}</p>
     <h2>${data.name}</h2>
     <p><strong>Email:</strong> ${data.email}</p>
     <p><strong>Phone:</strong> ${data.phone}</p>
@@ -54,6 +60,5 @@ function showCandidateDetails(imageUrl) {
     <p><strong>Package:</strong> ${data.salary}</p>
   `;
 
-  document.getElementById("capturedPhoto").src = imageUrl;
   document.getElementById("cameraSection").style.display = "none";
 }
