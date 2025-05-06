@@ -1,6 +1,3 @@
-// candidate.js
-
-// Triggered when candidate clicks login
 function loginAndCapture() {
   const id = document.getElementById("candidateId").value.trim();
   const data = localStorage.getItem(id);
@@ -10,10 +7,8 @@ function loginAndCapture() {
     return;
   }
 
-  // Show camera section
   document.getElementById("cameraSection").style.display = "block";
 
-  // Start webcam
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(stream => {
       document.getElementById("video").srcObject = stream;
@@ -24,7 +19,6 @@ function loginAndCapture() {
     });
 }
 
-// Triggered when user clicks capture
 function capturePhoto() {
   const canvas = document.getElementById("canvas");
   const video = document.getElementById("video");
@@ -33,25 +27,24 @@ function capturePhoto() {
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   const imageUrl = canvas.toDataURL("image/png");
 
-  // Stop webcam
   video.srcObject.getTracks().forEach(track => track.stop());
 
-  // Show details and photo
   showCandidateDetails(imageUrl);
 }
 
-// Display all candidate details + image + candidate ID below image
 function showCandidateDetails(imageUrl) {
   const id = document.getElementById("candidateId").value.trim();
   const data = JSON.parse(localStorage.getItem(id));
 
-  if (!data) return;
+  if (!data) {
+    alert("Candidate not found.");
+    return;
+  }
 
   document.getElementById("candidateDetails").style.display = "block";
   document.getElementById("detailsContent").innerHTML = `
-    <img id="capturedPhoto" src="${imageUrl}" alt="Candidate Photo" />
-    <p><strong>Candidate ID:</strong> ${data.candidateId || id}</p>
     <h2>${data.name}</h2>
+    <p><strong>ID:</strong> ${data.candidateId}</p>
     <p><strong>Email:</strong> ${data.email}</p>
     <p><strong>Phone:</strong> ${data.phone}</p>
     <p><strong>Address:</strong> ${data.address}</p>
@@ -60,5 +53,5 @@ function showCandidateDetails(imageUrl) {
     <p><strong>Package:</strong> ${data.salary}</p>
   `;
 
-  document.getElementById("cameraSection").style.display = "none";
+  document.getElementById("capturedPhoto").src = imageUrl;
 }
